@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AtlasWrapper.iml" filepath="$PROJECT_DIR$/AtlasWrapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-commonbiz/android-commonbiz.iml" filepath="$PROJECT_DIR$/android-commonbiz/android-commonbiz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-framework-sdk/android-framework-sdk.iml" filepath="$PROJECT_DIR$/android-framework-sdk/android-framework-sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-middleware-library/android-middleware-library.iml" filepath="$PROJECT_DIR$/android-middleware-library/android-middleware-library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/laucher/laucher.iml" filepath="$PROJECT_DIR$/laucher/laucher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/splashscreen/splashscreen.iml" filepath="$PROJECT_DIR$/splashscreen/splashscreen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/splashscreen-lottie/splashscreen-lottie.iml" filepath="$PROJECT_DIR$/splashscreen-lottie/splashscreen-lottie.iml" />
+    </modules>
+  </component>
+</project>

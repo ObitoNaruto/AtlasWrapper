@@ -1,0 +1,110 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.taobao.atlas'
+
+atlas {
+    bundleConfig {
+        awbBundle true
+    }
+    buildTypes {
+        debug {
+            baseApFile project.rootProject.file('app/build/outputs/apk/app-debug.ap')
+        }
+    }
+}
+
+group = 'com.mobile.android'
+def artifact_Id = "splashscreen"
+version = '1.0.0'
+
+configurations {
+    all*.exclude group: 'com.android.support', module: 'multidex'
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    //添加运行库依赖
+    providedCompile("com.taobao.android:atlas_core:$rootProject.ext.atlasCoreVersion@aar") {
+        transitive = true
+    }
+//    compile project(':splashscreen-lottie')
+//    compile name:'splashscreen-lottie', ext"'aar"
+    providedCompile("com.mobile.android:splashscreen-lottie:1.0.0@aar")
+
+    providedCompile "com.android.support:appcompat-v7:$rootProject.ext.appcompat_v7Version"
+    providedCompile "com.android.support.constraint:constraint-layout:$rootProject.ext.constraint_layoutVersion"
+    providedCompile project(':android-middleware-library')
+}
+
+
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+//task sourcesJar(type: Jar) {
+//    from('src/main') {
+//        include '**'
+//    }
+//    classifier = 'sources'
+//}
+
+publishing {
+    // 指定仓库位置
+    repositories {
+        mavenLocal()
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact "${project.buildDir}/outputs/awb/${project.name}-debug.awb"
+//            artifact sourcesJar
+            artifactId artifact_Id
+
+//            pom.withXml {
+//                def dependenciesNode
+//                def providedCompileDependencies = configurations.providedCompile.allDependencies
+//                configurations.compile.allDependencies.each {
+//                    if(it.group && it.name && it.version && !isInProvidedCompile(providedCompileDependencies, it)) {
+//                        if(!dependenciesNode) {
+//                            dependenciesNode = asNode().appendNode('dependencies')
+//                        }
+//
+//                        def dependencyNode = dependenciesNode.appendNode('dependency')
+//                        dependencyNode.appendNode('groupId', it.group)
+//                        dependencyNode.appendNode('artifactId', it.name)
+//                        dependencyNode.appendNode('version', it.version)
+//                    }
+//                }
+//            }
+        }
+    }
+}
+
+boolean isInProvidedCompile(providedCompileDependencies, compileDependency) {
+    boolean isInProvidedCompile = false
+    providedCompileDependencies.each {
+        if(!isInProvidedCompile && it.group == compileDependency.group &&
+                it.name == compileDependency.name) {
+            isInProvidedCompile = true
+        }
+    }
+    return isInProvidedCompile
+}
